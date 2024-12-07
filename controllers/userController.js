@@ -54,7 +54,7 @@ export const addExpense = async (req, res) => {
 export const addExpectedData = async(req,res)=>{
   try {
     const { username, dailyExpense, monthlyExpense } = req.body;
-    const user = await User.find({username:username});
+    const user = await User.findOne({username:username});
     if (!user) {
       console.log("user not found")
       return res.status(404).json({ message: 'User not found' });
