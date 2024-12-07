@@ -40,6 +40,7 @@ export const addExpense = async (req, res) => {
     const { userId, date, amount, category, title } = req.body;
     const user = await User.findById(userId);
     if (!user) {
+      console.log("user not found")
       return res.status(404).json({ message: 'User not found' });
     }
     user.expenses.push({ Date: date, Amount: amount, category, title });
@@ -55,13 +56,17 @@ export const addExpectedData = async(req,res)=>{
     const { username, dailyExpense, monthlyExpense } = req.body;
     const user = await User.find({username:username});
     if (!user) {
+      console.log("user not found")
       return res.status(404).json({ message: 'User not found' });
     }
     user.maxMonthlyExpense=monthlyExpense;
     user.maxDailyExpense=dailyExpense;
     await user.save();
+    console.log('Max Expense added successfully')
     res.status(200).json({ message: 'Max Expense added successfully' });
   } catch (error) {
+    console.log(error);
+    console.log(error.message)
     res.status(500).json({ error: error.message });
   }
 }
