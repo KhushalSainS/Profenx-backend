@@ -74,4 +74,21 @@ export const addExpectedData = async(req,res)=>{
   }
 }
 
+export const getExpenses = async(req,res)=>{
+  try {
+    const { username } = req.body;
+    const user = await User.findOne({username:username});
+    if (!user) {
+      console.log("user not found")
+      return res.status(404).json({ message: 'User not found' });
+    }
+    console.log('Expenses fetched')
+    res.status(200).json({ expenses: user.expenses, message: 'Expenses fetched' });
+  } catch (error) {
+    console.log(error);
+    console.log(error.message)
+    res.status(500).json({ error: error.message });
+  }
+}
+
 
