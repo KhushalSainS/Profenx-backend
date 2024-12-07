@@ -37,16 +37,19 @@ export const login = async (req, res) => {
 
 export const addExpense = async (req, res) => {
   try {
-    const { userId, date, amount, category, title } = req.body;
-    const user = await User.findById(userId);
+    const { username, date, amount, commonExpense, title } = req.body;
+    const user = await User.findOne({ username:username });
     if (!user) {
       console.log("user not found")
       return res.status(404).json({ message: 'User not found' });
     }
-    user.expenses.push({ Date: date, Amount: amount, category, title });
+    user.expenses.push({ Date: date, Amount: amount, category: commonExpense, title: title });
     await user.save();
+    console.log("expense added")
     res.status(200).json({ message: 'Expense added successfully' });
   } catch (error) {
+    console.log(error)
+    console.log(error.message)
     res.status(500).json({ error: error.message });
   }
 };
