@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  categories: { type: [String], unique: false }, // Changed to an array of strings
   expenses: [
     {
       Date: Date,
