@@ -6,6 +6,7 @@ export const signup = async (req, res) => {
     console.log(req.body);
     const newUser = new User({ username:username, password:password });
     await newUser.save();
+    console.log(newUser._id)
     console.log("signup passed!!!")
     res.status(200).json({ message: 'User created successfully' });
   } catch (error) {
