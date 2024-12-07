@@ -43,4 +43,20 @@ export const addExpense = async (req, res) => {
   }
 };
 
+export const addExpectedData = async(req,res)=>{
+  try {
+    const { username, dailyExpense, monthlyExpense } = req.body;
+    const user = await User.find({username:username});
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.maxMonthlyExpense=monthlyExpense;
+    user.maxDailyExpense=dailyExpense;
+    await user.save();
+    res.status(200).json({ message: 'Max Expense added successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 
