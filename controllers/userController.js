@@ -27,3 +27,18 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.addExpense = async (req, res) => {
+  try {
+    const { userId, date, amount, category, title } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.expenses.push({ Date: date, Amount: amount, category, title });
+    await user.save();
+    res.status(200).json({ message: 'Expense added successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
