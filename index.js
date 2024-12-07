@@ -1,7 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import userRoutes from './routes/userRoutes';
-import connectDB from "./Config/dbConfig";
+import userRoutes from './routes/userRoutes.js';
+import connectDB from "./Config/dbConfig.js";
+import bodyParser from "body-parser";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

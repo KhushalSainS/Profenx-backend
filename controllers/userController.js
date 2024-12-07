@@ -1,6 +1,6 @@
-import User from '../models/User';
+import User from '../models/User.js';
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { username, password } = req.body;
     const newUser = new User({ username, password });
@@ -11,7 +11,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.addExpense = async (req, res) => {
+export const addExpense = async (req, res) => {
   try {
     const { userId, date, amount, category, title } = req.body;
     const user = await User.findById(userId);
@@ -42,3 +42,5 @@ exports.addExpense = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
