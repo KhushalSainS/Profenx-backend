@@ -1,14 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import userRoutes from './routes/userRoutes';
+import connectDB from "./Config/dbConfig";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost:27017/yourdbname', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+connectDB();
 
 app.use(bodyParser.json());
 app.use('/api/users', userRoutes);

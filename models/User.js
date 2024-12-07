@@ -4,6 +4,8 @@ import bcrypt from 'bcrypt';
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  maxMonthlyExpense: {type:Number},
+  maxDailyExpense: {type:Number},
   expenses: [
     {
       Date: Date,
