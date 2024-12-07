@@ -3,8 +3,10 @@ import User from '../models/User.js';
 export const signup = async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log(req.body);
     const newUser = new User({ username, password });
     await newUser.save();
+    console.log("signup passed!!!")
     res.status(200).json({ message: 'User created successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
